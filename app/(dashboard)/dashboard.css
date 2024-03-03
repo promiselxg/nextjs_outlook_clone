@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    margin: 0;
+    padding: 0;
+}
+@layer base {
+  :root {
+    --primary-bg: #141414;
+    --seconday-bg: #0a0a0a;
+
+    --text-blue: #479ef5;
+    --text-gray: #333333;
+    --text-gray-500: #969A98
+
+    --single-mail-bg: #292929;
+    --single-mail-hover-bg: #141414;
+    --mail-text-color: #ddeae0;
+    --open-mail-pane-bg: #1f1f1f;
+    --open-mail-pane-hover_bg: #333333;
+    --unread-mail-border-bg: #479ef5;
+    --unread-mail-text-bg: #0a0a0a;
+    --active-mail-bg: #0a2e4a;
+
+    --mail-sidebar-bg: #0a0a0a;
+    --mail-border: #4d4d4d;
+
+    --search-box-border: #7e7e7e;
+  }
+
+  .dark {
+  }
+}
+
