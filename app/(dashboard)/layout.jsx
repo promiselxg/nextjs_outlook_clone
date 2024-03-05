@@ -2,6 +2,9 @@ import { Poppins } from "next/font/google";
 import "./dashboard.css";
 import Header from "./_components/header/Header";
 import { cn } from "@/lib/utils";
+import MiniSideBar from "./_components/sidebar/MiniSideBar";
+import SideBar from "./_components/sidebar/SideBar";
+import TopHeader from "./_components/header/TopHeader";
 
 const poppins = Poppins({
   subsets: ["latin"],
