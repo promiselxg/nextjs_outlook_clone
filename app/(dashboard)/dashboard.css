@@ -50,7 +50,7 @@
   body {
     height: 100vh;
     background-color: var(--primary-bg);
-    /* overflow: hidden; */
+    overflow: hidden;
   }
   *::-webkit-scrollbar {
     width: 10px;

@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import MiniSideBar from "./_components/sidebar/MiniSideBar";
 import SideBar from "./_components/sidebar/SideBar";
 import TopHeader from "./_components/header/TopHeader";
+import RightSideBar from "./_components/sidebar/RightSideBar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,11 +31,13 @@ export default function RootLayout({ children }) {
               <TopHeader />
             </div>
             <div className="flex">
-              <div className="w-[18%] bg-[yellow] min-h-screen">
+              <div className="w-[18%] h-full">
                 <SideBar />
               </div>
-              <div className="w-[22%] bg-[orange]"></div>
-              <div className="w-[60%] bg-[green] p-10 h-screen">{children}</div>
+
+              <div className="flex w-[82%] bg-[--primary-bg] h-screen">
+                {children}
+              </div>
             </div>
           </div>
         </div>

@@ -1,0 +1,15 @@
+.mailCheckbox,
+.mailDeleteBtn,
+.mailOptions {
+  display: none;
+}
+
+.singleMail:hover > .mailCheckbox,
+.singleMail:hover > .mailDeleteBtn,
+.singleMail:hover > .mailOptions {
+  display: flex;
+}
+
+.mailDeleteBtn:hover > .trash {
+  color: white !important;
+}

@@ -43,7 +43,7 @@ const SideBar = () => {
                 </LinkWithIconWrapper>
                 <LinkWithIconWrapper>
                   <Link
-                    href="/"
+                    href="/mail/drafts"
                     className="flex items-center justify-between w-full"
                   >
                     <LinkWithIcon
@@ -96,7 +96,7 @@ const SideBar = () => {
                 </LinkWithIconWrapper>
                 <LinkWithIconWrapper>
                   <Link
-                    href="/"
+                    href="/mail/drafts"
                     className="flex items-center justify-between w-full"
                   >
                     <LinkWithIcon
