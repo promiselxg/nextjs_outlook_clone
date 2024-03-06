@@ -5,7 +5,7 @@ import { LuCloud, LuGrip } from "react-icons/lu";
 const MiniSideBar = () => {
   return (
     <>
-      <div className="bg-[--seconday-bg] w-[50px] min-h-screen   items-center  text-center border-r-[1px] border-r-[--border-color]">
+      <div className="bg-[--seconday-bg] h-full w-[50px] text-center border-r-[1px] border-r-[--border-color] flex">
         <ul className="mini_sidebar flex flex-col">
           <li className="flex items-center justify-center hover:bg-[#333] hover:cursor-pointer w-[50px] h-[35px] transition-all delay-75">
             <Link href="/mail">

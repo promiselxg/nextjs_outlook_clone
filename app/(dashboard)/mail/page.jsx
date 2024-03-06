@@ -6,10 +6,7 @@ const Inbox = () => {
   return (
     <>
       <div className="bg-[--seconday-bg] text-white flex">
-        <MiniSideBar />
-
-        <TopHeader />
-        {/* <SideBar /> */}
+        <h1>mail box</h1>
       </div>
     </>
   );

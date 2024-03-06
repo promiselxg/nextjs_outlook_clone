@@ -28,7 +28,7 @@ import { RiArrowGoForwardFill } from "react-icons/ri";
 const TopHeader = () => {
   return (
     <>
-      <div className="w-full min-h-20">
+      <div className="w-full min-h-20 bg-[--primary-bg] flex flex-col">
         <div className="h-[36px] w-full mx-auto bg-[--primary-bg] mb-[4px] items-center flex">
           <div className="flex items-center w-full gap-5 text-sm text-[--mail-text-color] font-[500]">
             <Link href="/" className="ml-1">
@@ -43,15 +43,15 @@ const TopHeader = () => {
         </div>
         <div className="flex items-center gap-3 w-[99.5%] mx-auto bg-[--single-mail-bg] shadow-md  rounded-[5px]  p-[6px] ">
           <span className="flex items-center text-[#212121]">
-            <button class="btn flex items-center gap-3 bg-[#69afe5]  p-1 rounded-tl rounded-bl">
+            <button className="btn flex items-center gap-3 bg-[#69afe5]  p-1 rounded-tl rounded-bl">
               <FiMail />
               New mail
             </button>
-            <button class="btn flex gap-2 bg-[#69afe5]  p-2 rounded-tr rounded-br border-l-[0.1px] border-l-[#212121]">
+            <button className="btn flex gap-2 bg-[#69afe5]  p-2 rounded-tr rounded-br border-l-[0.1px] border-l-[#212121]">
               <FiChevronDown />
             </button>
           </span>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-[12px]">
             <Icon icon={<FiTrash2 />} text="Delete" />
             <Icon icon={<FiArchive />} text="Archive" />
             <Icon icon={<FiShield />} text="Report" />
