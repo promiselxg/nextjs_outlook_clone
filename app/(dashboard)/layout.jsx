@@ -36,6 +36,9 @@ export default function RootLayout({ children }) {
               </div>
 
               <div className="flex w-[82%] bg-[--primary-bg] h-screen">
+                <div className="w-[26%]">
+                  <RightSideBar />
+                </div>
                 {children}
               </div>
             </div>

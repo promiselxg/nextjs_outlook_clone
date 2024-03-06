@@ -4,9 +4,9 @@
   display: none;
 }
 
-.singleMail:hover > .mailCheckbox,
-.singleMail:hover > .mailDeleteBtn,
-.singleMail:hover > .mailOptions {
+.singleMail:hover > a .mailCheckbox,
+.singleMail:hover > a .mailDeleteBtn,
+.singleMail:hover > a .mailOptions {
   display: flex;
 }
 

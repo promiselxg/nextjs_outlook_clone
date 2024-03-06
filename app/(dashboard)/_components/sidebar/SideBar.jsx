@@ -25,13 +25,17 @@ const SideBar = () => {
     <>
       <div className="w-full bg-[--primary-bg]   text-[rgba(255,255,255,0.8)] top-[135px] overflow-hidden  h-full">
         <div className="flex flex-col p-2 hover:overflow-y-scroll h-full">
-          <Accordion type="single" collapsible>
+          <Accordion
+            type="multiple"
+            collapsible="true"
+            defaultValue={["favorites"]}
+          >
             <AccordionItem value="favorites">
               <AccordionTrigger>Favorites</AccordionTrigger>
               <AccordionContent>
                 <LinkWithIconWrapper>
                   <Link
-                    href="/"
+                    href="/mail"
                     className="flex items-center justify-between w-full"
                   >
                     <LinkWithIcon
@@ -78,13 +82,17 @@ const SideBar = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-          <Accordion type="single" collapsible>
-            <AccordionItem value="favorites">
+          <Accordion
+            type="multiple"
+            collapsible="true"
+            defaultValue={["folders"]}
+          >
+            <AccordionItem value="folders">
               <AccordionTrigger>Folders</AccordionTrigger>
               <AccordionContent>
                 <LinkWithIconWrapper>
                   <Link
-                    href="/"
+                    href="/mail"
                     className="flex items-center justify-between w-full"
                   >
                     <LinkWithIcon
