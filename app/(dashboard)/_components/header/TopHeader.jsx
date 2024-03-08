@@ -28,7 +28,7 @@ import { RiArrowGoForwardFill } from "react-icons/ri";
 const TopHeader = () => {
   return (
     <>
-      <div className="w-full min-h-20 bg-[--primary-bg] flex flex-col">
+      <div className="w-[99.5%] min-h-20 bg-[--primary-bg] flex flex-col">
         <div className="h-[36px] w-full mx-auto bg-[--primary-bg] mb-[4px] items-center flex">
           <div className="flex items-center w-full gap-5 text-sm text-[--mail-text-color] font-[500]">
             <Link href="/" className="ml-1">
