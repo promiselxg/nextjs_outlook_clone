@@ -24,7 +24,7 @@ const Searchbar = () => {
                 name=""
                 id=""
                 placeholder="Search"
-                className="w-[40%] bg-transparent outline-none border-none ml-[4px] text-[14px] text-white placeholder:text-[rgba(255,255,255,0.7)]"
+                className="w-full bg-transparent outline-none border-none mx-2 text-[14px] text-white placeholder:text-[rgba(255,255,255,0.7)]"
               />
             </div>
           </div>

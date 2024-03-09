@@ -23,6 +23,7 @@
     --unread-mail-border-bg: #479ef5;
     --unread-mail-text-bg: #0a0a0a;
     --active-mail-bg: #0a2e4a;
+    --user-info-bg: #343538;
 
     --mail-sidebar-bg: #0a0a0a;
     --mail-border: #4d4d4d;
@@ -46,7 +47,9 @@
     width: 20px;
     height: 16px;
   }
-
+  .mail-body:last-child {
+    margin-bottom: 200px !important;
+  }
   body {
     height: 100vh;
     background-color: var(--primary-bg);
