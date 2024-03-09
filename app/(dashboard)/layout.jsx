@@ -20,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={cn(`${poppins.className} bg-[white] w-full`)}>
+      <body className={cn(`${poppins.className} bg-[--primary-bg] w-full`)}>
         <Header />
         <div className="flex w-full">
           <div className="w-fit bg-[green] min-h-screen">

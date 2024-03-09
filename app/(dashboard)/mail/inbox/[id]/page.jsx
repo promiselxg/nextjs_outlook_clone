@@ -16,8 +16,8 @@ const page = () => {
     <>
       <div className="flex w-full ml-2 flex-col">
         <div className="flex w-[98.5%] min-h-10 h-12 p-2 my-2 rounded-[5px] bg-[--single-mail-bg] z-10">
-          <h1 className="uppercase text-[rgba(255,255,255,0.8)]">
-            FAULTY TRUNCATING MACHINE = USELU BRANCH 097
+          <h1 className="uppercase text-[rgba(255,255,255,0.9)] font-[500]">
+            Mail title is meant to appear here.
           </h1>
         </div>
         <div className="pr-[4px] flex h-screen overflow-y-scroll flex-col">
@@ -100,14 +100,13 @@ const page = () => {
                             Anuforo Okechukwu Deede
                           </h1>
                           <p className="uppercase text-[12px] text-white">
-                            Team member,it technical support
+                            fullstack web developer.
                           </p>
                         </span>
                         <span className="flex  gap-1">
-                          <FiMapPin className="h-5 w-5" />
+                          <FiMapPin className="h-4 w-5" />
                           <h1 className="text-[12px] uppercase">
-                            ABUJA - PLOT 792, MOHAMMED BUHARI WAY, CENTRAL
-                            BUSINESS DISTRICT
+                            ABUJA, nigeria
                           </h1>
                         </span>
                       </div>
