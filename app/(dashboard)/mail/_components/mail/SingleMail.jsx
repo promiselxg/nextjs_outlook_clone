@@ -8,7 +8,7 @@ import Link from "next/link";
 const SingleMail = () => {
   return (
     <>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <Link href="/mail/inbox/11111oaiapa">
           <div className="flex p-2 gap-3">
             <div className="mt-1">
@@ -42,7 +42,7 @@ const SingleMail = () => {
           </div>
         </Link>
       </div>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <div className="flex p-2 gap-3">
           <div className="mt-1">
             <Avatar className="h-9 w-9">
@@ -74,7 +74,7 @@ const SingleMail = () => {
           <Checkbox className="h-6 w-6 mx-3 rounded-sm border border-[rgba(255,255,255,0.4)]" />
         </div>
       </div>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <div className="flex p-2 gap-3">
           <div className="mt-1">
             <Avatar className="h-9 w-9">
@@ -106,7 +106,7 @@ const SingleMail = () => {
           <Checkbox className="h-6 w-6 mx-3 rounded-sm border border-[rgba(255,255,255,0.4)]" />
         </div>
       </div>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <div className="flex p-2 gap-3">
           <div className="mt-1">
             <Avatar className="h-9 w-9">
@@ -138,7 +138,7 @@ const SingleMail = () => {
           <Checkbox className="h-6 w-6 mx-3 rounded-sm border border-[rgba(255,255,255,0.4)]" />
         </div>
       </div>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <div className="flex p-2 gap-3">
           <div className="mt-1">
             <Avatar className="h-9 w-9">
@@ -170,7 +170,7 @@ const SingleMail = () => {
           <Checkbox className="h-6 w-6 mx-3 rounded-sm border border-[rgba(255,255,255,0.4)]" />
         </div>
       </div>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <div className="flex p-2 gap-3">
           <div className="mt-1">
             <Avatar className="h-9 w-9">
@@ -202,7 +202,7 @@ const SingleMail = () => {
           <Checkbox className="h-6 w-6 mx-3 rounded-sm border border-[rgba(255,255,255,0.4)]" />
         </div>
       </div>
-      <div className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
+      <div className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail">
         <div className="flex p-2 gap-3">
           <div className="mt-1">
             <Avatar className="h-9 w-9">

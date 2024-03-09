@@ -3,8 +3,8 @@ import defaultImage from "../../../public/assets/dark.svg";
 const Inbox = () => {
   return (
     <>
-      <div className=" text-white flex w-[74%]">
-        <div className="flex w-full items-center h-full">
+      <div className=" text-white flex w-full">
+        <div className="flex w-full items-center h-full  justify-center">
           <div className="w-full flex flex-col items-center -mt-[90px]">
             <h1 className="text-[rgba(255,255,255,0.6)] text-sm">
               Select an Item to read

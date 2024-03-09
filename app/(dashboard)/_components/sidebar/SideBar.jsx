@@ -23,8 +23,8 @@ import { LinkWithIcon, LinkWithIconWrapper } from "../link/Links";
 const SideBar = () => {
   return (
     <>
-      <div className="w-full bg-[--primary-bg]   text-[rgba(255,255,255,0.8)] top-[135px] overflow-hidden  h-full">
-        <div className="flex flex-col p-2 hover:overflow-y-scroll h-full">
+      <div className="w-[full] bg-[--primary-bg] text-[rgba(255,255,255,0.8)] top-[135px] overflow-hidden">
+        <div className="flex flex-col p-2 hover:overflow-y-scroll h-[600px]">
           <Accordion
             type="multiple"
             collapsible="true"

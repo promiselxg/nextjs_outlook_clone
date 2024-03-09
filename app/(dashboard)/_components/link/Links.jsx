@@ -28,7 +28,7 @@ const LinkWithIcon = ({ icon, label, ...children }) => {
 const LinkWithIconWrapper = ({ children }) => {
   return (
     <>
-      <div className="flex items-center hover:cursor-pointer hover:bg-[--single-mail-bg] rounded-md py-2 px-2  text-white transition-all delay-75 ">
+      <div className="flex items-center hover:cursor-pointer hover:bg-[--single-mail-bg] rounded-md py-2 px-2  text-white transition-all delay-75 LinkWithIconWrapper">
         {children}
       </div>
     </>

@@ -9,7 +9,9 @@
 .singleMail:hover > a .mailOptions {
   display: flex;
 }
-
+.singleMail:last-child {
+  margin-bottom: 130px !important;
+}
 .mailDeleteBtn:hover > .trash {
   color: white !important;
 }

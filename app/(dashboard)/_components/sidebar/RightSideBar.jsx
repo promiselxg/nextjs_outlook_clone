@@ -33,7 +33,7 @@ const RightSideBar = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-full overflow-y-scroll  bg-[--single-mail-bg]">
+        <div className="w-full h-[600px] hover:overflow-y-scroll  bg-[--single-mail-bg]">
           <div>
             <SingleMail />
           </div>

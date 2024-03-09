@@ -50,6 +50,8 @@
   .mail-body:last-child {
     margin-bottom: 200px !important;
   }
+  .LinkWithIconWrapper:last-child {
+  }
   body {
     height: 100vh;
     background-color: var(--primary-bg);
