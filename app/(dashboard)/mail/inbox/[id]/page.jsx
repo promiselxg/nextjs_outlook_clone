@@ -38,7 +38,6 @@ const Page = () => {
         );
         setLoading(false);
         setMessage(response);
-        console.log(response);
       } catch (error) {
         setLoading(false);
         console.log(error);

@@ -43,13 +43,15 @@ const TopHeader = () => {
         </div>
         <div className="flex items-center gap-3 w-[99.5%] mx-auto bg-[--single-mail-bg] shadow-md  rounded-[5px]  p-[6px] ">
           <span className="flex items-center text-[#212121]">
-            <button className="btn flex items-center gap-3 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-1 rounded-tl rounded-bl">
-              <FiMail />
-              New mail
-            </button>
-            <button className="btn flex gap-2 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-2 rounded-tr rounded-br border-l-[0.1px] border-l-[#212121]">
-              <FiChevronDown />
-            </button>
+            <Link href="/mail/new" className="flex items-center">
+              <button className="btn flex items-center gap-3 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-1 rounded-tl rounded-bl">
+                <FiMail />
+                New mail
+              </button>
+              <button className="btn flex gap-2 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-2 rounded-tr rounded-br border-l-[0.1px] border-l-[#212121]">
+                <FiChevronDown />
+              </button>
+            </Link>
           </span>
           <div className="flex items-center gap-[12px]">
             <Icon icon={<FiTrash2 />} text="Delete" />

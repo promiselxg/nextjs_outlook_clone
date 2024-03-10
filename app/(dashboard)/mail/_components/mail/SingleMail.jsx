@@ -7,7 +7,7 @@ import { GrPin } from "react-icons/gr";
 import "./SingleMail.css";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { databases } from "@/lib/appwrite";
+import { client, databases } from "@/lib/appwrite";
 import { SkeletonLoader } from "@/app/(dashboard)/_components/loader/Loader";
 
 const SingleMail = () => {
@@ -16,6 +16,13 @@ const SingleMail = () => {
 
   useEffect(() => {
     getAllMails();
+    client.subscribe(
+      `databases.${process.env.NEXT_PUBLIC_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_COLLECTION_ID}.documents`,
+      (res) => {
+        // Callback will be executed on changes for documents A and all files.
+        console.log("REAL TIME==", res);
+      }
+    );
   }, []);
 
   const getAllMails = async () => {
