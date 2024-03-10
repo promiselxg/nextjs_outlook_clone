@@ -10,3 +10,14 @@ export function SkeletonLoader() {
     </div>
   );
 }
+export function SkeletonCard() {
+  return (
+    <div className="flex flex-col space-y-3">
+      <Skeleton className="h-[400px] w-full rounded-xl bg-[--single-mail-bg]" />
+      <div className="space-y-2">
+        <Skeleton className="h-2 w-[90%] bg-[--single-mail-bg]" />
+        <Skeleton className="h-2 w-[80%] bg-[--single-mail-bg]" />
+      </div>
+    </div>
+  );
+}

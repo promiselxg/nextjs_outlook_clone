@@ -19,12 +19,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { LinkWithIcon, LinkWithIconWrapper } from "../link/Links";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const SideBar = () => {
   return (
     <>
-      <div className="w-[full] bg-[--primary-bg] text-[rgba(255,255,255,0.8)] top-[135px] overflow-hidden">
-        <div className="flex flex-col p-2 hover:overflow-y-scroll h-[600px]">
+      <div className="w-[full] bg-[--primary-bg] text-[rgba(255,255,255,0.8)] top-[135px] ">
+        <ScrollArea className="flex flex-col p-2  h-[600px]">
           <Accordion
             type="multiple"
             collapsible="true"
@@ -212,7 +213,7 @@ const SideBar = () => {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </div>
+        </ScrollArea>
       </div>
     </>
   );

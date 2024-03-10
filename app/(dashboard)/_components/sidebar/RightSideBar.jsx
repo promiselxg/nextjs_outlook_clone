@@ -3,6 +3,7 @@ import Link from "next/link";
 import { IoCopyOutline } from "react-icons/io5";
 import { GoFilter } from "react-icons/go";
 import SingleMail from "../../mail/_components/mail/SingleMail";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const RightSideBar = () => {
   return (
@@ -33,11 +34,11 @@ const RightSideBar = () => {
             </div>
           </div>
         </div>
-        <div className="w-full h-[600px] hover:overflow-y-scroll  bg-[--single-mail-bg]">
+        <ScrollArea className="w-full h-[600px] bg-[--single-mail-bg]">
           <div>
             <SingleMail />
           </div>
-        </div>
+        </ScrollArea>
       </div>
     </>
   );

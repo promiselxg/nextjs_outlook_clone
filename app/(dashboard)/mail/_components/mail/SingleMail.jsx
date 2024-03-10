@@ -33,7 +33,6 @@ const SingleMail = () => {
     }
   };
 
-  console.log(mails);
   return (
     <>
       {loading ? (
@@ -43,7 +42,7 @@ const SingleMail = () => {
       ) : (
         mails?.map((mail) => (
           <div
-            className="flex w-[99%] min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail"
+            className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail"
             key={mail?.$id}
           >
             <Link href={`/mail/inbox/${mail?.$id}`}>

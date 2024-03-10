@@ -6,7 +6,7 @@ import { FiChevronDown, FiTrash2, FiTwitch } from "react-icons/fi";
 import Icon from "../_components/icon/Icon";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { databases } from "@/lib/appwrite";
+import { ID, databases } from "@/lib/appwrite";
 const Inbox = () => {
   const [submiting, setSubmiting] = useState(false);
   const [formField, setFormField] = useState({
@@ -31,7 +31,7 @@ const Inbox = () => {
       const response = await databases.createDocument(
         `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
         `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
-        "65ede88ccb9f461f3cb2",
+        ID.unique(),
         {
           receiver_email: [formField.receiver_email],
           cc: [formField.cc],
@@ -113,7 +113,8 @@ const Inbox = () => {
                   handleInputChange("receiver_email", e.target.value)
                 }
                 value={formField.receiver_email}
-                className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
+                autoComplete="false"
+                className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm "
               />
             </div>
             <div className="w-full flex gap-2">
@@ -124,6 +125,7 @@ const Inbox = () => {
                 type="text"
                 name="cc"
                 id="cc"
+                autoComplete="false"
                 onChange={(e) => handleInputChange("cc", e.target.value)}
                 value={formField.cc}
                 className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
@@ -137,6 +139,7 @@ const Inbox = () => {
               id="subject"
               onChange={(e) => handleInputChange("subject", e.target.value)}
               value={formField.subject}
+              autoComplete="false"
               placeholder="Add a subject"
               className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3"
             />
@@ -150,6 +153,7 @@ const Inbox = () => {
                 handleInputChange("message_body", e.target.value)
               }
               value={formField.message_body}
+              autoComplete="false"
               placeholder="Type / to insert files and more"
               className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3 h-screen"
             ></textarea>
