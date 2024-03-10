@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { databases } from "@/lib/appwrite";
 const Inbox = () => {
+  const [submiting, setSubmiting] = useState(false);
   const [formField, setFormField] = useState({
     receiver_email: "",
     cc: "",
@@ -26,6 +27,7 @@ const Inbox = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setSubmiting(true);
       const response = await databases.createDocument(
         `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
         `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
@@ -38,8 +40,10 @@ const Inbox = () => {
           subject: formField.subject,
         }
       );
+      setSubmiting(false);
       console.log(response);
     } catch (error) {
+      setSubmiting(false);
       console.log(error);
     }
   };
@@ -68,12 +72,26 @@ const Inbox = () => {
           <div className="w-full min-h-10  p-3 items-center flex justify-between  border-[--mail-border] border-b-[1px]">
             <div className="flex items-center text-[#212121]">
               <button
-                className="btn flex items-center gap-3 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-[6px] rounded-tl rounded-bl"
+                className="btn flex items-center gap-3 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-[6px] rounded-tl rounded-bl disabled:cursor-not-allowed"
                 onClick={handleSubmit}
+                disabled={
+                  submiting ||
+                  !formField.receiver_email ||
+                  !formField.message_body ||
+                  !formField.subject
+                }
               >
                 Send
               </button>
-              <button className="btn flex gap-2 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-[10px] rounded-tr rounded-br border-l-[0.1px] border-l-[#212121]">
+              <button
+                className="btn flex gap-2 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-[10px] rounded-tr rounded-br border-l-[0.1px] border-l-[#212121] disabled:cursor-not-allowed"
+                disabled={
+                  submiting ||
+                  !formField.receiver_email ||
+                  !formField.message_body ||
+                  !formField.subject
+                }
+              >
                 <FiChevronDown />
               </button>
             </div>
