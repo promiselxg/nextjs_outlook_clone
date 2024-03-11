@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { ID, databases } from "@/lib/appwrite";
 import Icon from "../../_components/icon/Icon";
+import { useRouter } from "next/navigation";
 
 const NewMail = () => {
+  const router = useRouter();
   const [submiting, setSubmiting] = useState(false);
   const [formField, setFormField] = useState({
     receiver_email: "",
@@ -40,6 +42,7 @@ const NewMail = () => {
           subject: formField.subject,
         }
       );
+      router.push("/mail");
       setSubmiting(false);
     } catch (error) {
       setSubmiting(false);
@@ -62,7 +65,7 @@ const NewMail = () => {
                   !formField.subject
                 }
               >
-                Send
+                {submiting ? "Please wait..." : "Send"}
               </button>
               <button
                 className="btn flex gap-2 bg-[#69afe5] hover:bg-[#77b7f7] transition-all delay-75 p-[10px] rounded-tr rounded-br border-l-[0.1px] border-l-[#212121] disabled:cursor-not-allowed"
@@ -94,7 +97,6 @@ const NewMail = () => {
                   handleInputChange("receiver_email", e.target.value)
                 }
                 value={formField.receiver_email}
-                autoComplete="false"
                 className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm "
               />
             </div>
@@ -106,7 +108,6 @@ const NewMail = () => {
                 type="text"
                 name="cc"
                 id="cc"
-                autoComplete="false"
                 onChange={(e) => handleInputChange("cc", e.target.value)}
                 value={formField.cc}
                 className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
@@ -120,7 +121,6 @@ const NewMail = () => {
               id="subject"
               onChange={(e) => handleInputChange("subject", e.target.value)}
               value={formField.subject}
-              autoComplete="false"
               placeholder="Add a subject"
               className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3"
             />
@@ -134,7 +134,6 @@ const NewMail = () => {
                 handleInputChange("message_body", e.target.value)
               }
               value={formField.message_body}
-              autoComplete="false"
               placeholder="Type / to insert files and more"
               className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3 h-screen"
             ></textarea>

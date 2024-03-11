@@ -16,13 +16,18 @@ const SingleMail = () => {
 
   useEffect(() => {
     getAllMails();
-    client.subscribe(
+    const unsubscribe = client.subscribe(
       `databases.${process.env.NEXT_PUBLIC_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_COLLECTION_ID}.documents`,
       (res) => {
         // Callback will be executed on changes for documents A and all files.
-        console.log("REAL TIME==", res);
+        setMails((prevState) => [res.payload, ...prevState]);
       }
     );
+    console.log("unsubscribe:", unsubscribe);
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   const getAllMails = async () => {
