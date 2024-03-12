@@ -4,8 +4,6 @@ Microsoft Outlook Mail Clone
 
 ## Description
 
-## Getting Started
-
 ### Dependencies
 
 - [NextJs](https://nextjs.org/docs)
