@@ -1,12 +1,14 @@
 "use client";
 
-import { FiChevronDown, FiTrash2, FiTwitch } from "react-icons/fi";
+import { FiChevronDown, FiTrash2, FiTwitch, FiX } from "react-icons/fi";
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ID, databases } from "@/lib/appwrite";
 import Icon from "../../_components/icon/Icon";
 import { useRouter } from "next/navigation";
+import "./newMail.css";
+import SuggestedContacts from "./_components/SuggestedContacts";
 
 const NewMail = () => {
   const router = useRouter();
@@ -49,6 +51,56 @@ const NewMail = () => {
       console.log(error);
     }
   };
+
+  const showComboBox = (comboBoxId) => {
+    var allComboBoxes = document.querySelectorAll(".combo-box");
+    allComboBoxes.forEach(function (box) {
+      box.style.display = "none";
+    });
+
+    // Get the clicked input field
+    var clickedInput = document.activeElement;
+
+    // Get the position of the clicked input field
+    var inputRect = clickedInput.getBoundingClientRect();
+
+    // Get the corresponding combo box
+    var comboBox = document.getElementById(comboBoxId);
+
+    // Calculate the distance between input and combo box
+    var distance = inputRect.bottom - inputRect.top;
+
+    // Position the combo box below the clicked input field based on distance
+    comboBox.style.left = "70px";
+    comboBox.style.top = distance + "px";
+
+    // Display the combo box
+    comboBox.style.display = "block";
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if the clicked element is not an input field or combo box
+      if (
+        !event.target.matches("input") &&
+        !event.target.matches(".combo-box")
+      ) {
+        // Hide all combo boxes
+        const allComboBoxes = document.querySelectorAll(".combo-box");
+        allComboBoxes.forEach((box) => {
+          box.style.display = "none";
+        });
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      // Clean up the event listener on component unmount
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       <div className="flex w-full px-2">
@@ -84,60 +136,68 @@ const NewMail = () => {
               <Icon icon={<FiTwitch />} />
             </div>
           </div>
-          <div className="w-full p-2">
-            <div className="w-full flex gap-2 mb-2">
-              <Button className="bg-transparent flex gap-2 items-center hover:bg-[--seconday-bg] transition-all delay-75 border-[1px] border-[--mail-border] h-9 w-16">
-                To
-              </Button>
-              <input
-                type="text"
-                name="receiver_email"
-                id="receiver_email"
-                onChange={(e) =>
-                  handleInputChange("receiver_email", e.target.value)
-                }
-                value={formField.receiver_email}
-                className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm "
-              />
+          <form autoComplete="off">
+            <div className="w-full p-2">
+              <div className="w-full flex gap-2 mb-2 relative">
+                <Button className="bg-transparent flex gap-2 items-center hover:bg-[--seconday-bg] transition-all delay-75 border-[1px] border-[--mail-border] h-9 w-16">
+                  To
+                </Button>
+                <input
+                  type="text"
+                  name="receiver_email"
+                  id="receiver_email"
+                  onChange={(e) =>
+                    handleInputChange("receiver_email", e.target.value)
+                  }
+                  onClick={() => showComboBox("combo1")}
+                  value={formField.receiver_email}
+                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm "
+                />
+                <div id="combo1" className="combo-box">
+                  <SuggestedContacts />
+                </div>
+              </div>
+              <div className="w-full flex gap-2 relative">
+                <Button className="bg-transparent flex gap-2 items-center hover:bg-[--seconday-bg] transition-all delay-75 border-[1px] border-[--mail-border] h-9 w-16">
+                  Cc
+                </Button>
+                <input
+                  type="text"
+                  name="cc"
+                  id="cc"
+                  onChange={(e) => handleInputChange("cc", e.target.value)}
+                  onClick={() => showComboBox("combo2")}
+                  value={formField.cc}
+                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
+                />
+                <div id="combo2" className="combo-box">
+                  <SuggestedContacts />
+                </div>
+              </div>
             </div>
             <div className="w-full flex gap-2">
-              <Button className="bg-transparent flex gap-2 items-center hover:bg-[--seconday-bg] transition-all delay-75 border-[1px] border-[--mail-border] h-9 w-16">
-                Cc
-              </Button>
-              <input
-                type="text"
-                name="cc"
-                id="cc"
-                onChange={(e) => handleInputChange("cc", e.target.value)}
-                value={formField.cc}
-                className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
-              />
+              <textarea
+                name="subject"
+                id="subject"
+                onChange={(e) => handleInputChange("subject", e.target.value)}
+                value={formField.subject}
+                placeholder="Add a subject"
+                className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3 h-[50px] resize-none"
+              ></textarea>
             </div>
-          </div>
-          <div className="w-full flex gap-2">
-            <input
-              type="text"
-              name="subject"
-              id="subject"
-              onChange={(e) => handleInputChange("subject", e.target.value)}
-              value={formField.subject}
-              placeholder="Add a subject"
-              className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3"
-            />
-          </div>
-          <div className="w-full flex gap-2">
-            <textarea
-              type="text"
-              name="message_body"
-              id="message_body"
-              onChange={(e) =>
-                handleInputChange("message_body", e.target.value)
-              }
-              value={formField.message_body}
-              placeholder="Type / to insert files and more"
-              className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3 h-screen"
-            ></textarea>
-          </div>
+            <div className="w-full flex gap-2">
+              <textarea
+                name="message_body"
+                id="message_body"
+                onChange={(e) =>
+                  handleInputChange("message_body", e.target.value)
+                }
+                value={formField.message_body}
+                placeholder="Type / to insert files and more"
+                className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3 h-screen  resize-none"
+              ></textarea>
+            </div>
+          </form>
         </div>
       </div>
     </>

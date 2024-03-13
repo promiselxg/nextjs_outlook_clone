@@ -1,0 +1,17 @@
+.combo-box {
+  display: none;
+  position: absolute;
+  padding: 5px;
+  background: var(--open-mail-pane-hover_bg);
+  width: 300px;
+  z-index: 10;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
+  border-bottom-right-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+}
+.closeBtn {
+  display: none;
+}
+.combo-box li:hover .closeBtn {
+  display: block;
+}

@@ -23,8 +23,6 @@ const SingleMail = () => {
         setMails((prevState) => [res.payload, ...prevState]);
       }
     );
-    console.log("unsubscribe:", unsubscribe);
-
     return () => {
       unsubscribe();
     };
