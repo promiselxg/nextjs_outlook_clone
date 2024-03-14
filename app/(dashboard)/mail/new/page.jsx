@@ -9,6 +9,7 @@ import Icon from "../../_components/icon/Icon";
 import { useRouter } from "next/navigation";
 import "./newMail.css";
 import SuggestedContacts from "./_components/SuggestedContacts";
+import { cn } from "@/lib/utils";
 
 const NewMail = () => {
   const router = useRouter();
@@ -153,8 +154,15 @@ const NewMail = () => {
                   value={formField.receiver_email}
                   className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm "
                 />
-                <div id="combo1" className="combo-box">
-                  <SuggestedContacts />
+                <div
+                  id="combo1"
+                  className={cn(
+                    `combo-box ${
+                      formField?.receiver_email?.length > 3 && "p-[5px]"
+                    }`
+                  )}
+                >
+                  <SuggestedContacts value={formField.receiver_email} />
                 </div>
               </div>
               <div className="w-full flex gap-2 relative">
@@ -170,8 +178,13 @@ const NewMail = () => {
                   value={formField.cc}
                   className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
                 />
-                <div id="combo2" className="combo-box">
-                  <SuggestedContacts />
+                <div
+                  id="combo2"
+                  className={cn(
+                    `combo-box ${formField?.cc?.length > 3 && "p-[5px]"}`
+                  )}
+                >
+                  <SuggestedContacts value={formField.cc} />
                 </div>
               </div>
             </div>
