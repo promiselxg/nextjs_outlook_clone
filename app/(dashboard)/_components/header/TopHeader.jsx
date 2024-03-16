@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   FiMail,
@@ -12,6 +14,7 @@ import {
   FiClock,
   FiPrinter,
   FiMoreHorizontal,
+  FiX,
 } from "react-icons/fi";
 import Icon from "../icon/Icon";
 import { LiaBroomSolid } from "react-icons/lia";
@@ -24,11 +27,40 @@ import {
 import { AiOutlineThunderbolt } from "react-icons/ai";
 import { IoMailOpenOutline } from "react-icons/io5";
 import { RiArrowGoForwardFill } from "react-icons/ri";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
+import { client } from "@/lib/appwrite";
+import { useEffect, useState } from "react";
 
 const TopHeader = () => {
+  const [newMail, setNewMail] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = client.subscribe(
+      `databases.${process.env.NEXT_PUBLIC_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_COLLECTION_ID}.documents`,
+      (res) => {
+        // Callback will be executed on changes for documents A and all files.
+        setIsVisible(true);
+        setNewMail(res.payload);
+      }
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const closeNotificationPan = setTimeout(() => {
+      setIsVisible(false);
+    }, 5000);
+
+    return () => clearTimeout(closeNotificationPan);
+  }, []);
+
   return (
     <>
-      <div className="w-[99.5%] min-h-20 bg-[--primary-bg] flex flex-col">
+      <div className="w-[99.5%] min-h-20 bg-[--primary-bg] flex flex-col relative">
         <div className="h-[36px] w-full mx-auto bg-[--primary-bg] mb-[4px] items-center flex">
           <div className="flex items-center w-full gap-5 text-sm text-[--mail-text-color] font-[500]">
             <Link href="/" className="ml-1">
@@ -79,6 +111,38 @@ const TopHeader = () => {
             <Icon icon={<FiMoreHorizontal />} />
           </div>
         </div>
+        {isVisible && (
+          <div
+            className="flex w-[300px] bg-[--seconday-bg] p-2 absolute top-3 right-0 z-20 rounded-md overflow-hidden border border-[--border-color]"
+            onClick={() => setIsVisible(!isVisible)}
+          >
+            <Link href={`/mail/inbox/${newMail?.$id}`}>
+              <div className="flex p-2 gap-3">
+                <div className="mt-1">
+                  <Avatar className="h-9 w-9">
+                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </div>
+                <div className="w-full flex flex-col leading-tight">
+                  <span className="text-white font-[600] text-sm">
+                    {newMail?.sender_email}
+                  </span>
+                  <span className="text-[--text-blue] font-[600] mb-[2px] text-sm">
+                    {newMail?.subject?.substring(0, 20)}...
+                  </span>
+                  <span className="text-[rgba(255,255,255,0.8)] text-sm">
+                    {newMail?.message_body?.substring(0, 30)}
+                  </span>
+                </div>
+              </div>
+            </Link>
+            <FiX
+              className="h-5 w-5 text-[--text-blue] absolute right-2 top-2 hover:text-white transition-all delay-75 hover:cursor-pointer"
+              onClick={() => setIsVisible(!isVisible)}
+            />
+          </div>
+        )}
       </div>
     </>
   );

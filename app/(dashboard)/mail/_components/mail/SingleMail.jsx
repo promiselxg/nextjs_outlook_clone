@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { client, databases } from "@/lib/appwrite";
 import { SkeletonLoader } from "@/app/(dashboard)/_components/loader/Loader";
+import { Query } from "appwrite";
 
 const SingleMail = () => {
   const [mails, setMails] = useState([]);
@@ -33,7 +34,8 @@ const SingleMail = () => {
       setLoading(true);
       const response = await databases.listDocuments(
         `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
-        `${process.env.NEXT_PUBLIC_COLLECTION_ID}`
+        `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
+        [Query.orderDesc("$createdAt")]
       );
       setLoading(false);
       setMails(response.documents);

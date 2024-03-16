@@ -152,7 +152,7 @@ const NewMail = () => {
                   }
                   onClick={() => showComboBox("combo1")}
                   value={formField.receiver_email}
-                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm "
+                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em]"
                 />
                 <div
                   id="combo1"
@@ -176,7 +176,7 @@ const NewMail = () => {
                   onChange={(e) => handleInputChange("cc", e.target.value)}
                   onClick={() => showComboBox("combo2")}
                   value={formField.cc}
-                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[--search-box-border] text-sm"
+                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em]"
                 />
                 <div
                   id="combo2"
