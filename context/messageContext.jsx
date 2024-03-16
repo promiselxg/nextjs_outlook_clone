@@ -6,7 +6,7 @@ const MessageContext = createContext();
 
 // Create a provider component
 const MessageProvider = ({ children }) => {
-  const [isToggled, setIsToggled] = useState(true);
+  const [isToggled, setIsToggled] = useState(false);
 
   const toggle = () => {
     setIsToggled((prevState) => !prevState);

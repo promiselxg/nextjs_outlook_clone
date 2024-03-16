@@ -58,6 +58,7 @@ const TopHeader = () => {
     return () => clearTimeout(closeNotificationPan);
   }, []);
 
+  console.log(isVisible);
   return (
     <>
       <div className="w-[99.5%] min-h-20 bg-[--primary-bg] flex flex-col relative">
