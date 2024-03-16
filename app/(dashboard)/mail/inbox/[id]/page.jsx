@@ -16,6 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { databases } from "@/lib/appwrite";
 import { SkeletonCard } from "@/app/(dashboard)/_components/loader/Loader";
+import { Permission, Role } from "appwrite";
 
 const Page = () => {
   const pathname = usePathname();
@@ -36,6 +37,16 @@ const Page = () => {
           `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
           `${id}`
         );
+        await databases.updateDocument(
+          `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
+          `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
+          `${id}`,
+          {
+            open: true,
+          },
+          [Permission.update(Role.any())]
+        );
+
         setLoading(false);
         setMessage(response);
       } catch (error) {

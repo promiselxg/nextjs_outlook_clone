@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { client, databases } from "@/lib/appwrite";
 import { SkeletonLoader } from "@/app/(dashboard)/_components/loader/Loader";
 import { Query } from "appwrite";
+import { cn } from "@/lib/utils";
 
 const SingleMail = () => {
   const [mails, setMails] = useState([]);
@@ -54,7 +55,11 @@ const SingleMail = () => {
       ) : (
         mails?.map((mail) => (
           <div
-            className="flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail"
+            className={cn(
+              `flex w-full min-h-[90px] items-center hover:bg-[--primary-bg] border-t-[1px] border-[--mail-border] border-b-[1px] relative singleMail ${
+                mail?.open ? "readMail" : "unreadMail"
+              }`
+            )}
             key={mail?.$id}
           >
             <Link href={`/mail/inbox/${mail?.$id}`}>
@@ -69,7 +74,13 @@ const SingleMail = () => {
                   <span className="text-white font-[600] text-sm">
                     {mail?.sender_email}
                   </span>
-                  <span className="text-[--text-blue] font-[600] mb-[2px] text-sm">
+                  <span
+                    className={cn(
+                      `font-[600] mb-[2px] text-sm ${
+                        mail?.open ? "text-[#ddeae0]" : "text-[--text-blue]"
+                      }`
+                    )}
+                  >
                     {mail?.subject?.substring(0, 20)}...
                   </span>
                   <span className="text-[rgba(255,255,255,0.8)] text-sm">

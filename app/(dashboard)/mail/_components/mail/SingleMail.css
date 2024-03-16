@@ -15,3 +15,10 @@
 .mailDeleteBtn:hover > .trash {
   color: white !important;
 }
+
+.readMail {
+  border-left-color: inherit;
+}
+.unreadMail {
+  border-left: 4px solid #479ef5;
+}
