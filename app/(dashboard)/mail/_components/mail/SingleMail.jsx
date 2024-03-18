@@ -22,7 +22,11 @@ const SingleMail = () => {
       `databases.${process.env.NEXT_PUBLIC_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_COLLECTION_ID}.documents`,
       (res) => {
         // Callback will be executed on changes for documents A and all files.
-        setMails((prevState) => [res.payload, ...prevState]);
+        if (
+          res.events.includes("databases.*.collections.*.documents.*.create")
+        ) {
+          setMails((prevState) => [res.payload, ...prevState]);
+        }
       }
     );
     return () => {

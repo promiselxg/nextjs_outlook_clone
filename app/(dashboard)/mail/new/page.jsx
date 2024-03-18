@@ -15,8 +15,8 @@ const NewMail = () => {
   const router = useRouter();
   const [submiting, setSubmiting] = useState(false);
   const [formField, setFormField] = useState({
-    receiver_email: "",
-    cc: "",
+    receiver_email: [],
+    cc: [],
     message_body: "",
     sender_email: "okeydeede@gmail.com",
     subject: "",
@@ -30,6 +30,7 @@ const NewMail = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formField);
     e.preventDefault();
     try {
       setSubmiting(true);
@@ -151,7 +152,7 @@ const NewMail = () => {
                     handleInputChange("receiver_email", e.target.value)
                   }
                   onClick={() => showComboBox("combo1")}
-                  value={formField.receiver_email}
+                  value={formField?.receiver_email}
                   className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em]"
                 />
                 <div
@@ -162,7 +163,12 @@ const NewMail = () => {
                     }`
                   )}
                 >
-                  <SuggestedContacts value={formField.receiver_email} />
+                  <SuggestedContacts
+                    fieldName="receiver_email"
+                    value={formField.receiver_email}
+                    formField={formField}
+                    setFormField={setFormField}
+                  />
                 </div>
               </div>
               <div className="w-full flex gap-2 relative">
@@ -175,7 +181,7 @@ const NewMail = () => {
                   id="cc"
                   onChange={(e) => handleInputChange("cc", e.target.value)}
                   onClick={() => showComboBox("combo2")}
-                  value={formField.cc}
+                  value={formField?.cc}
                   className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em]"
                 />
                 <div
@@ -184,7 +190,12 @@ const NewMail = () => {
                     `combo-box ${formField?.cc?.length > 3 && "p-[5px]"}`
                   )}
                 >
-                  <SuggestedContacts value={formField.cc} />
+                  <SuggestedContacts
+                    value={formField.cc}
+                    fieldName="cc"
+                    formField={formField}
+                    setFormField={setFormField}
+                  />
                 </div>
               </div>
             </div>

@@ -41,8 +41,12 @@ const TopHeader = () => {
       `databases.${process.env.NEXT_PUBLIC_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_COLLECTION_ID}.documents`,
       (res) => {
         // Callback will be executed on changes for documents A and all files.
-        setIsVisible(true);
-        setNewMail(res.payload);
+        if (
+          res.events.includes("databases.*.collections.*.documents.*.create")
+        ) {
+          setIsVisible(true);
+          setNewMail(res.payload);
+        }
       }
     );
     return () => {
