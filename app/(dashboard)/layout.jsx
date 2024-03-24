@@ -7,6 +7,10 @@ import SideBar from "./_components/sidebar/SideBar";
 import TopHeader from "./_components/header/TopHeader";
 import RightSideBar from "./_components/sidebar/RightSideBar";
 import { MessageProvider } from "@/context/messageContext";
+import Modal from "@/components/ui/modal";
+import FormModal from "./mail/new/_components/FormModal";
+import "./mail/new/newMail.css";
+import { SendMailFormProvider } from "@/context/SendMailContext";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,31 +26,36 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <MessageProvider>
-        <body className={cn(`${poppins.className} bg-[--primary-bg] w-full`)}>
-          <Header />
-          <div className="flex w-full">
-            <div className="w-fit bg-[green] min-h-screen">
-              <MiniSideBar />
-            </div>
-            <div className="flex flex-col w-full">
-              <div className="w-full">
-                <TopHeader />
+        <SendMailFormProvider>
+          <body className={cn(`${poppins.className} bg-[--primary-bg] w-full`)}>
+            <Header />
+            <div className="flex w-full">
+              <div className="w-fit bg-[green] min-h-screen">
+                <MiniSideBar />
               </div>
-              <div className="flex">
-                <div className="w-[18%] h-full">
-                  <SideBar />
+              <div className="flex flex-col w-full">
+                <div className="w-full">
+                  <TopHeader />
                 </div>
-
-                <div className="flex h-screen w-full">
-                  <div className="w-[26%]">
-                    <RightSideBar />
+                <div className="flex">
+                  <div className="w-[18%] h-full">
+                    <SideBar />
                   </div>
-                  <div className="w-[74%] flex relative">{children}</div>
+
+                  <div className="flex h-screen w-full">
+                    <div className="w-[26%]">
+                      <RightSideBar />
+                    </div>
+                    <div className="w-[74%] flex relative">{children}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </body>
+            <Modal className="flex w-[500px] bg-[--primary-bg] relative flex-col h-fit">
+              <FormModal />
+            </Modal>
+          </body>
+        </SendMailFormProvider>
       </MessageProvider>
     </html>
   );

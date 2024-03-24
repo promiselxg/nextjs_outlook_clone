@@ -2,8 +2,8 @@
   display: none;
   position: absolute;
   background: var(--open-mail-pane-hover_bg);
-  width: 300px;
-  max-width: 300px;
+  width: 100%;
+  max-width: 100%;
   z-index: 10;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.25);
   border-bottom-right-radius: 5px !important;

@@ -1,48 +1,28 @@
 "use client";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useInputFormModal } from "@/context/SendMailContext";
 import { databases } from "@/lib/appwrite";
 import { Query } from "appwrite";
 import React, { useEffect, useState } from "react";
 import { FiX } from "react-icons/fi";
 
-const SuggestedContacts = ({ value, formField, setFormField, fieldName }) => {
+const SuggestedContacts = ({ value, inputField }) => {
   const [suggestedContacts, setSuggestedContacts] = useState([]);
-
-  const handleComboItemClick = (fieldName, item) => {
-    const fieldValue = Array.isArray(formField[fieldName])
-      ? [...formField[fieldName], item]
-      : [formField[fieldName], item];
-
-    // Update the form field with the concatenated array
-    setFormField((prevFormField) => ({
-      ...prevFormField,
-      [fieldName]: fieldValue,
-    }));
-    // Hide the combo box
-    //inputField.nextElementSibling.style.display = "none";
-    console.log(formField);
-  };
+  const { handleComboItemClick } = useInputFormModal();
 
   useEffect(() => {
     const getUser = async () => {
       const response = await databases.listDocuments(
         `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
         `65f736f50c7439686a9f`,
-        [
-          Query.search(
-            "full_name",
-            `${formField?.receiver_email} || ${formField?.cc}`
-          ),
-        ]
+        [Query.search("full_name", `${value}`)]
       );
       setSuggestedContacts(response?.documents);
     };
     getUser();
-  }, [formField?.receiver_email, formField?.cc]);
+  }, [value]);
 
-  //console.log(suggestedContacts);
-  console.log(formField);
   return (
     <>
       <h1 className="text-[12px] px-2 py-2 text-[--mail-text-color] font-[300] ">
@@ -53,7 +33,7 @@ const SuggestedContacts = ({ value, formField, setFormField, fieldName }) => {
           <li
             className="flex gap-2 items-center hover:bg-[--seconday-bg] hover:cursor-pointer w-full p-1 rounded-md relative"
             onClick={() =>
-              handleComboItemClick(`${fieldName}`, contact?.email_address)
+              handleComboItemClick(inputField, contact?.email_address)
             }
             key={contact?.$id}
           >

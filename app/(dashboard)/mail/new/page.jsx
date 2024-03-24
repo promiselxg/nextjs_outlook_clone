@@ -8,42 +8,29 @@ import { ID, databases } from "@/lib/appwrite";
 import Icon from "../../_components/icon/Icon";
 import { useRouter } from "next/navigation";
 import "./newMail.css";
-import SuggestedContacts from "./_components/SuggestedContacts";
-import { cn } from "@/lib/utils";
+
+import { useInputFormModal } from "@/context/SendMailContext";
 
 const NewMail = () => {
   const router = useRouter();
   const [submiting, setSubmiting] = useState(false);
-  const [formField, setFormField] = useState({
-    receiver_email: [],
-    cc: [],
-    message_body: "",
-    sender_email: "okeydeede@gmail.com",
-    subject: "",
-  });
-
-  const handleInputChange = (fieldName, value) => {
-    setFormField((prevFormField) => ({
-      ...prevFormField,
-      [fieldName]: value,
-    }));
-  };
+  const { isOpen, openModal, formField, handleInputChange, formData } =
+    useInputFormModal();
 
   const handleSubmit = async (e) => {
     console.log(formField);
     e.preventDefault();
     try {
       setSubmiting(true);
-      const response = await databases.createDocument(
+      await databases.createDocument(
         `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
         `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
         ID.unique(),
         {
-          receiver_email: [formField.receiver_email],
-          cc: [formField.cc],
-          message_body: formField.message_body,
-          sender_email: formField.sender_email,
-          subject: formField.subject,
+          receiver_email: formField?.to,
+          message_body: formField?.message_body,
+          sender_email: formField?.sender_email,
+          subject: formField?.subject,
         }
       );
       router.push("/mail");
@@ -52,32 +39,6 @@ const NewMail = () => {
       setSubmiting(false);
       console.log(error);
     }
-  };
-
-  const showComboBox = (comboBoxId) => {
-    var allComboBoxes = document.querySelectorAll(".combo-box");
-    allComboBoxes.forEach(function (box) {
-      box.style.display = "none";
-    });
-
-    // Get the clicked input field
-    var clickedInput = document.activeElement;
-
-    // Get the position of the clicked input field
-    var inputRect = clickedInput.getBoundingClientRect();
-
-    // Get the corresponding combo box
-    var comboBox = document.getElementById(comboBoxId);
-
-    // Calculate the distance between input and combo box
-    var distance = inputRect.bottom - inputRect.top;
-
-    // Position the combo box below the clicked input field based on distance
-    comboBox.style.left = "70px";
-    comboBox.style.top = distance + "px";
-
-    // Display the combo box
-    comboBox.style.display = "block";
   };
 
   useEffect(() => {
@@ -145,33 +106,15 @@ const NewMail = () => {
                   To
                 </Button>
                 <input
-                  type="text"
                   name="receiver_email"
                   id="receiver_email"
-                  onChange={(e) =>
-                    handleInputChange("receiver_email", e.target.value)
-                  }
-                  onClick={() => showComboBox("combo1")}
-                  value={formField?.receiver_email}
-                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em]"
+                  onClick={() => openModal(!isOpen, "receiver_email")}
+                  value={formData?.receiver_email?.join(";")}
+                  readOnly
+                  className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em] whitespace-pre-wrap text-wrap"
                 />
-                <div
-                  id="combo1"
-                  className={cn(
-                    `combo-box ${
-                      formField?.receiver_email?.length > 3 && "p-[5px]"
-                    }`
-                  )}
-                >
-                  <SuggestedContacts
-                    fieldName="receiver_email"
-                    value={formField.receiver_email}
-                    formField={formField}
-                    setFormField={setFormField}
-                  />
-                </div>
               </div>
-              <div className="w-full flex gap-2 relative">
+              {/* <div className="w-full flex gap-2 relative">
                 <Button className="bg-transparent flex gap-2 items-center hover:bg-[--seconday-bg] transition-all delay-75 border-[1px] border-[--mail-border] h-9 w-16">
                   Cc
                 </Button>
@@ -179,32 +122,19 @@ const NewMail = () => {
                   type="text"
                   name="cc"
                   id="cc"
-                  onChange={(e) => handleInputChange("cc", e.target.value)}
-                  onClick={() => showComboBox("combo2")}
-                  value={formField?.cc}
+                  onClick={() => openModal(!isOpen, "cc")}
+                  value={formData?.cc?.join(";")}
+                  readOnly
                   className="form-text bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] text-sm tracking-[0.03em]"
                 />
-                <div
-                  id="combo2"
-                  className={cn(
-                    `combo-box ${formField?.cc?.length > 3 && "p-[5px]"}`
-                  )}
-                >
-                  <SuggestedContacts
-                    value={formField.cc}
-                    fieldName="cc"
-                    formField={formField}
-                    setFormField={setFormField}
-                  />
-                </div>
-              </div>
+              </div> */}
             </div>
             <div className="w-full flex gap-2">
               <textarea
                 name="subject"
                 id="subject"
                 onChange={(e) => handleInputChange("subject", e.target.value)}
-                value={formField.subject}
+                value={formField?.subject}
                 placeholder="Add a subject"
                 className="bg-transparent w-full border-[--mail-border] border-b-[1px] outline-none text-[rgba(255,255,255,0.8)] p-3 h-[50px] resize-none"
               ></textarea>
