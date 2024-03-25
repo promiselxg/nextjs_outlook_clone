@@ -1,11 +1,14 @@
+"use client";
 import { SearchIcon } from "lucide-react";
 import { LuGrip } from "react-icons/lu";
 import { FiSettings } from "react-icons/fi";
 import { BiBell, BiBulb, BiConversation } from "react-icons/bi";
 import { LuCalendarCheck2, LuFolderCog } from "react-icons/lu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useAccount } from "@/context/AuthContext";
 
 const Searchbar = () => {
+  const { logout } = useAccount();
   return (
     <>
       <div className="flex w-full text-white bg-[--seconday-bg] items-center h-[50px]">
@@ -48,7 +51,10 @@ const Searchbar = () => {
               <li className="h-[50px] flex items-center hover:bg-[--text-gray] px-3 hover:cursor-pointer transition-all delay-75">
                 <BiBulb className="text-[--search-box-border]" />
               </li>
-              <li className="h-[50px] px-2 flex items-center hover:bg-[--text-gray] hover:cursor-pointer transition-all delay-75">
+              <li
+                className="h-[50px] px-2 flex items-center hover:bg-[--text-gray] hover:cursor-pointer transition-all delay-75"
+                onClick={() => logout()}
+              >
                 <Avatar className="h-9 w-9">
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>

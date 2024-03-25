@@ -1,23 +1,39 @@
 "use client";
 
 import { account } from "@/lib/appwrite";
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
 
 // Create a provider component
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState("");
+  const router = useRouter();
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const getAccount = async () => {
-      setUser(await account.get());
+      if (user) {
+        setUser(await account.get());
+      } else {
+        router.push("/");
+      }
     };
     getAccount();
-  }, []);
+  }, [user, router]);
+
+  const logout = async () => {
+    const response = await account.deleteSession("current");
+    console.log(response);
+    if (!user) {
+      router.push("/");
+    }
+  };
 
   return (
-    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={{ user, logout }}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 

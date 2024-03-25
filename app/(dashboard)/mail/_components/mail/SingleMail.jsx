@@ -57,7 +57,7 @@ const SingleMail = () => {
       unsubscribe();
     };
   }, [getAllMails]);
-  console.log(mails);
+  console.log(user);
   return (
     <>
       {loading ? (

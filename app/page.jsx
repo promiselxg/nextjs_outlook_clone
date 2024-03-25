@@ -22,11 +22,6 @@ const LoginPage = () => {
   //   await account.create(ID.unique(), email, password, name);
   //   login(email, password);
   // };
-
-  const logout = async () => {
-    await account.deleteSession("current");
-    setLoggedInUser(null);
-  };
   const loginWithGithub = async (e) => {
     e.preventDefault();
     try {
@@ -54,11 +49,11 @@ const LoginPage = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (user) {
-  //     router.push("/mail");
-  //   }
-  // }, [router, user]);
+  useEffect(() => {
+    if (user) {
+      router.push("/mail");
+    }
+  }, [router, user]);
 
   return (
     <div className="w-full bg-[#141414] flex h-screen items-center justify-center flex-col ">
