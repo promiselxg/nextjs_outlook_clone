@@ -10,15 +10,15 @@ import { useRouter } from "next/navigation";
 import "./newMail.css";
 
 import { useInputFormModal } from "@/context/SendMailContext";
+import { useAccount } from "@/context/AuthContext";
 
 const NewMail = () => {
   const router = useRouter();
   const [submiting, setSubmiting] = useState(false);
   const { isOpen, openModal, formField, handleInputChange, formData } =
     useInputFormModal();
-
+  const { user } = useAccount();
   const handleSubmit = async (e) => {
-    console.log(formField);
     e.preventDefault();
     try {
       setSubmiting(true);
@@ -29,7 +29,7 @@ const NewMail = () => {
         {
           receiver_email: formField?.to,
           message_body: formField?.message_body,
-          sender_email: formField?.sender_email,
+          sender_email: user?.email,
           subject: formField?.subject,
         }
       );

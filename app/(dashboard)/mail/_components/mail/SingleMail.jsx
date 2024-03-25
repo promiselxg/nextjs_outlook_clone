@@ -6,15 +6,39 @@ import { FiFlag, FiMail, FiTrash2 } from "react-icons/fi";
 import { GrPin } from "react-icons/gr";
 import "./SingleMail.css";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { client, databases } from "@/lib/appwrite";
 import { SkeletonLoader } from "@/app/(dashboard)/_components/loader/Loader";
 import { Query } from "appwrite";
 import { cn } from "@/lib/utils";
+import { useAccount } from "@/context/AuthContext";
 
 const SingleMail = () => {
   const [mails, setMails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { user } = useAccount();
+
+  const getAllMails = useCallback(async () => {
+    try {
+      setLoading(true);
+      const response = await databases.listDocuments(
+        `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
+        `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
+        [
+          Query.search("receiver_email", `${user?.email?.split("@")[0]}`),
+          Query.orderDesc("$createdAt"),
+        ]
+      );
+
+      // Query.or([Query.lessThan(5), Query.greaterThan(10)]);
+
+      setLoading(false);
+      setMails(response?.documents);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  }, [user?.email]);
 
   useEffect(() => {
     getAllMails();
@@ -32,24 +56,8 @@ const SingleMail = () => {
     return () => {
       unsubscribe();
     };
-  }, []);
-
-  const getAllMails = async () => {
-    try {
-      setLoading(true);
-      const response = await databases.listDocuments(
-        `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
-        `${process.env.NEXT_PUBLIC_COLLECTION_ID}`,
-        [Query.orderDesc("$createdAt")]
-      );
-      setLoading(false);
-      setMails(response.documents);
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-    }
-  };
-
+  }, [getAllMails]);
+  console.log(mails);
   return (
     <>
       {loading ? (

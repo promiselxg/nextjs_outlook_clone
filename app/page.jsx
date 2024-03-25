@@ -1,29 +1,26 @@
 "use client";
+import { useAccount } from "@/context/AuthContext";
 import { ID, account } from "@/lib/appwrite";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { AiOutlineGithub } from "react-icons/ai";
 
 const LoginPage = () => {
-  const [loggedInUser, setLoggedInUser] = useState(null);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const { user } = useAccount();
   const router = useRouter();
 
-  const login = async (email, password) => {
-    try {
-      const session = await account.createEmailPasswordSession(email, password);
-      setLoggedInUser(await account.get());
-    } catch (error) {
-      alert(error);
-    }
-  };
+  // const login = async (email, password) => {
+  //   try {
+  //     const session = await account.createEmailPasswordSession(email, password);
+  //     setLoggedInUser(await account.get());
+  //   } catch (error) {
+  //     alert(error);
+  //   }
+  // };
 
-  const register = async () => {
-    await account.create(ID.unique(), email, password, name);
-    login(email, password);
-  };
+  // const register = async () => {
+  //   await account.create(ID.unique(), email, password, name);
+  //   login(email, password);
+  // };
 
   const logout = async () => {
     await account.deleteSession("current");
@@ -32,17 +29,18 @@ const LoginPage = () => {
   const loginWithGithub = async (e) => {
     e.preventDefault();
     try {
-      await account.createOAuth2Session(
+      const response = await account.createOAuth2Session(
         "github",
         "http://localhost:3000/mail", //success
         "http://localhost:3000" //failure
       );
+      console.log(response);
     } catch (error) {
       throw error;
     }
   };
 
-  if (loggedInUser) {
+  if (user) {
     router.push("/mail");
   }
 

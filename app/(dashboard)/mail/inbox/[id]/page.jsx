@@ -16,13 +16,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { databases } from "@/lib/appwrite";
 import { SkeletonCard } from "@/app/(dashboard)/_components/loader/Loader";
-import { Permission, Role } from "appwrite";
+import { Permission, Query, Role } from "appwrite";
 
 const Page = () => {
   const pathname = usePathname();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState([]);
+  const [senderInfo, setSenderInfo] = useState([]);
+
   useEffect(() => {
     const getMessage = async () => {
       // get ID
@@ -47,15 +49,22 @@ const Page = () => {
           [Permission.update(Role.any())]
         );
 
-        setLoading(false);
         setMessage(response);
+        // get sender information
+        const user = await databases.listDocuments(
+          `${process.env.NEXT_PUBLIC_DATABASE_ID}`,
+          "65f736f50c7439686a9f",
+          [Query.equal("email_address", [`${message?.sender_email}`])]
+        );
+        setSenderInfo(user?.documents);
+        setLoading(false);
       } catch (error) {
         setLoading(false);
         console.log(error);
       }
     };
     getMessage();
-  }, [pathname, router]);
+  }, [pathname, router, message?.sender_email]);
 
   return (
     <>
@@ -90,7 +99,7 @@ const Page = () => {
                     <div className="flex items-center justify-between w-full h-fit">
                       <div>
                         <h1 className="text-sm text-[--mail-text-color]">
-                          Okechukwu Deede Anuforo
+                          {senderInfo?.[0]?.full_name}
                         </h1>
                       </div>
                       <div className="flex items-center gap-2">
@@ -111,26 +120,33 @@ const Page = () => {
                       <div className="w-full flex items-center gap-1 justify-between text-sm text-[rgba(255,255,255,0.7)]">
                         <span className="flex items-center gap-1">
                           <p>To:</p>
-                          <ul className="flex items-center gap-1">
-                            <li className="hover:bg-[--seconday-bg] px-[2px] rounded-sm">
-                              <a href="/">Anuforo okechukwu</a>
-                            </li>
+                          <ul className="flex items-center">
+                            {message?.receiver_email?.map((to, i) => (
+                              <li
+                                className="hover:bg-[--seconday-bg] px-[2px] rounded-sm"
+                                key={i}
+                              >
+                                <a href="/">{to};</a>
+                              </li>
+                            ))}
                           </ul>
                         </span>
                         <span>
                           <p>{message?.$updatedAt}</p>
                         </span>
                       </div>
-                      <div className="w-full flex items-center gap-1 text-sm">
-                        <span className="flex items-center gap-1">
-                          <p>Cc:</p>
-                          <ul className="flex items-center gap-1 text-[rgba(255,255,255,1)]">
-                            <li className="hover:bg-[--seconday-bg] px-[2px] rounded-sm">
-                              <a href="/">Anuforo okechukwu</a>
-                            </li>
-                          </ul>
-                        </span>
-                      </div>
+                      {message?.cc?.length > 0 && (
+                        <div className="w-full flex items-center gap-1 text-sm">
+                          <span className="flex items-center gap-1">
+                            <p>Cc:</p>
+                            <ul className="flex items-center gap-1 text-[rgba(255,255,255,1)]">
+                              <li className="hover:bg-[--seconday-bg] px-[2px] rounded-sm">
+                                <a href="/">Anuforo okechukwu</a>
+                              </li>
+                            </ul>
+                          </span>
+                        </div>
+                      )}
                     </div>
                     <div className="w-full py-2 text-wrap whitespace-break-spaces  text-sm text-[--mail-text-color]">
                       <p>{message?.message_body}</p>
@@ -140,16 +156,18 @@ const Page = () => {
                         <div className=" w-1/2 min-h-36  p-4">
                           <span className="mb-2 flex flex-col">
                             <h1 className="capitalize text-[14px] font-bold text-white">
-                              Anuforo Okechukwu Deede
+                              {senderInfo?.[0]?.full_name}
                             </h1>
-                            <p className="uppercase text-[12px] text-white">
-                              fullstack web developer.
-                            </p>
+                            {senderInfo?.[0]?.jobTitle && (
+                              <p className="uppercase text-[12px] text-white">
+                                {senderInfo?.[0]?.jobTitle}
+                              </p>
+                            )}
                           </span>
                           <span className="flex  gap-1">
                             <FiMapPin className="h-4 w-5" />
                             <h1 className="text-[12px] uppercase">
-                              ABUJA, nigeria
+                              abuja, nigeria
                             </h1>
                           </span>
                         </div>
