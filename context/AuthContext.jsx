@@ -15,8 +15,6 @@ const AuthProvider = ({ children }) => {
     const getAccount = async () => {
       if (user) {
         setUser(await account.get());
-      } else {
-        router.push("/");
       }
     };
     getAccount();
